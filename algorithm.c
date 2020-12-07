@@ -60,17 +60,23 @@ void back_joon_1002()
         if(distance < 0) {
             distance = -distance;
         }
-        printf("%d : %d ", i, distance);
-        printf("r1 + t2 : %d \n", r1+r2);
+        printf("%d Line : %d ", (i + 1), distance);
+        printf("r1 + r2 : %d \n", r1+r2);
 
-        if(distance < (r1+r2)) {
-            result = 2;
-        }else if(distance == (r1+r2)) {
-            result = 1;
-        }else {
+        if(distance != 0) {
+            if(distance < (r1+r2)) {
+                result = 2;
+            }else if(distance == (r1+r2)) {
+                result = 1;
+            }else {
+                /* code */
+                result = 0;
+            }
+        }else{
             /* code */
             result = -1;
         }
+        
         printf("%d\n", result);
     }
 }
