@@ -8,10 +8,24 @@
 int random_number(int number);
 void back_joon_1002();
 
+void fibo(int n);
+void fibonacci(int n, int * count_0, int * count_1);
+void back_joon_1003();
+
 int main(int argc, char const *argv[])
 {
     /* code */
-    back_joon_1002();
+    // back_joon_1002();
+    clock_t start, end;
+    float res;
+
+    start = clock();
+    back_joon_1003();
+    end = clock();
+
+    res = (float)(end - start)/CLOCKS_PER_SEC;
+
+    printf("%lf", res);
     return 0;
 }
 
@@ -59,7 +73,7 @@ void back_joon_1002()
         y2 = t[i][4];
         r2 = t[i][5];
 
-        int distance = pow((x1 - y1), 2) + pow((x2 - y2), 2);
+        int distance = pow((x1 - x2), 2) + pow((y1 - y2), 2);
         int result = 0;
         if(distance < 0) {
             distance = -distance;
@@ -99,4 +113,58 @@ int random_number(int number)
     }
     
    return seed;
+}
+
+
+int cnt_0[41];
+int cnt_1[41];
+void back_joon_1003() {
+    int line = 0;
+    /* code */
+    scanf("%d", &line);
+    for(int i=0; i<line; i++){
+        int n = 0;
+        while (1)
+        {
+            /* code */
+            scanf("%d", &n);
+            if(0 <= n && n <= 40) break;
+        }
+        fibo(n);
+
+        printf("%d %d\n", cnt_0[n], cnt_1[n]);
+    }
+}
+
+void fibo(int n) {
+
+    if (n == 0) {
+        cnt_0[n] = 1;
+        cnt_1[n] = 0;
+        return;
+    } else if(n == 1){
+        cnt_0[n] = 0;
+        cnt_1[n] = 1;
+        return;
+    }else if(cnt_0[n] == 0 && cnt_1[n] == 0) {
+        fibo(n-1);
+        fibo(n-2);
+
+        cnt_0[n] = cnt_0[n-1] + cnt_0[n-2];
+        cnt_1[n] = cnt_1[n-1] + cnt_1[n-2];
+    }
+}
+
+void fibonacci(int n, int * count_0, int * count_1) {
+    if (n == 0) {
+        *count_0 = *count_0 + 1;
+        return;
+    } else if (n == 1) {
+        *count_1 = *count_1 + 1;
+        return;
+    } else {
+        fibonacci(n-1, count_0, count_1);
+        fibonacci(n-2, count_0, count_1);
+        return;
+    }
 }
