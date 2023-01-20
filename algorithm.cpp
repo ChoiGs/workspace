@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 int solution_64062(vector<int> stones, int k) {
@@ -112,4 +113,37 @@ int solution_42626(vector<int> scoville, int K) {
         
 //     }
 //     return answer;
+}
+
+
+//입국 심사
+using namespace std;
+long long solution_43238(int n, vector<int> times) {
+    long long answer = 0;
+    
+    long long min_time = 1;
+    long long max_time = ((long long)*max_element(times.begin(), times.end())) * n;
+    
+    long long avg;
+    while(min_time <= max_time) {
+        cout << "min_time : " << min_time << endl;
+        cout << "max_time : " << max_time << endl;
+        avg = (min_time + max_time) / 2;
+        cout << "avg : " << avg << endl;
+        long long cnt = 0;
+        for(int i = 0; i < times.size(); i++) {
+            cnt += (avg / (long long)times[i]);
+        }
+        cout << "cnt : " << cnt << endl;
+        
+        if (cnt >= n) {
+            max_time = avg - 1;
+            answer = avg;
+            cout << "answer : " << answer << endl;
+        }
+        else min_time = avg + 1;
+        
+        cout << endl;
+    }
+    return answer;
 }
